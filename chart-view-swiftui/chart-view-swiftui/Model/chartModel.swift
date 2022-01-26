@@ -5,4 +5,13 @@
 //  Created by Илья Чуб on 26.01.2022.
 //
 
-import Foundation
+import SwiftUI
+
+struct chartModel {
+    let titleIcon: Image
+    let titleText: String
+    let accentColor: Color
+    var subtitles: [String]
+    var minValue: (Int, Double)
+    var maxValue: (Int, Double)
+}
