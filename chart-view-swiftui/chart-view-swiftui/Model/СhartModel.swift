@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct chartModel {
+struct СhartModel {
     let titleIcon: Image
     let titleText: String
     let accentColor: Color
