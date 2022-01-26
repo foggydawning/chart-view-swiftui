@@ -51,8 +51,10 @@
 		D35AF9C127A19A86001A8A5B /* chart-view-swiftui */ = {
 			isa = PBXGroup;
 			children = (
-				D35AF9C227A19A86001A8A5B /* chart_view_swiftuiApp.swift */,
-				D35AF9C427A19A86001A8A5B /* ContentView.swift */,
+				D35AF9D027A19B28001A8A5B /* App */,
+				D35AF9D327A19B80001A8A5B /* Model */,
+				D35AF9D127A19B53001A8A5B /* View */,
+				D35AF9D227A19B5E001A8A5B /* ViewModel */,
 				D35AF9C627A19A88001A8A5B /* Assets.xcassets */,
 				D35AF9C827A19A88001A8A5B /* Preview Content */,
 			);
@@ -65,6 +67,36 @@
 				D35AF9C927A19A88001A8A5B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D35AF9D027A19B28001A8A5B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D35AF9C227A19A86001A8A5B /* chart_view_swiftuiApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D35AF9D127A19B53001A8A5B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D35AF9C427A19A86001A8A5B /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D35AF9D227A19B5E001A8A5B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D35AF9D327A19B80001A8A5B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
