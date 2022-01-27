@@ -20,9 +20,9 @@ struct СhartView: View {
             Subtitle(text: self.viewModel.model.subtitle)
             Spacer()
             DividingLine()
-            
+            Spacer()
             GeometryReader { geometry in
-                VStack{
+                VStack(spacing: 0){
                     HStack {
                         Spacer()
                         Text("68")
@@ -39,20 +39,20 @@ struct СhartView: View {
                             Spacer().frame(width: 10)
                             ForEach(self.viewModel.valueByIntervals, id: \.self){_ in
                                 Rectangle()
-                                    .foregroundColor(.red)
+                                    .foregroundColor(viewModel.model.accentColor)
                                     .frame(width: colWidth)
                                     .cornerRadius(30)
                                 Spacer().frame(width: 5)
                             }
                             Spacer().frame(width: 5)
-                        }.background(Color.blue)
+                        }
                     }
-                    
                     HStack {
                         Spacer()
                         Text("45")
                         Spacer()
                     }
+                    Spacer()
                     HStack {
                         Color(.black)
                             .frame(height: 20)
@@ -94,21 +94,11 @@ struct СhartView: View {
     private struct DividingLine: View {
         var body: some View {
             Rectangle()
-                .frame(height: 1)
+                .frame(height: 0.3)
                 .cornerRadius(10)
-                .padding([.leading,.trailing], 10)
-                .foregroundColor(.gray)
+                .padding([.leading,.trailing], 6)
+                .foregroundColor(Color.gray.opacity(0.7))
+                
         }
-    }
-}
-
-struct СhartView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScrollView {
-            СhartView()
-                .frame(width: UIScreen.main.bounds.width,
-                       height: UIScreen.main.bounds.width)
-        }
-        .background(Color.gray)
     }
 }

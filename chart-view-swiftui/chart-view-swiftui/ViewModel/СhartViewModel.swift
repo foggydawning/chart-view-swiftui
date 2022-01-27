@@ -5,20 +5,18 @@
 //  Created by Илья Чуб on 26.01.2022.
 //
 
+import SwiftUI
 import Combine
 import Foundation
 
 
 final class СhartViewModel: ObservableObject {
-    
     var objectWillChange = ObservableObjectPublisher()
     
     var model: СhartModel
     var valueByIntervals: [[Double]] = []
     var numberOfIntervals: Int = 0 {
-        didSet {
-            objectWillChange.send()
-        }
+        didSet {objectWillChange.send()}
     }
     
     init(){
@@ -101,7 +99,7 @@ extension СhartViewModel {
         return СhartModel(
             titleImageName: "heart.fill",
             titleText: "Пульс: сон",
-            accentColor: .red,
+            accentColor: Color("Heart"),
             subtitle: "Вот последние данные о Вашем пульсе во время сна.",
             values: [
                 (formatter.date(from: "2022-01-26T00:10")!, 68),
