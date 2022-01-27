@@ -127,7 +127,18 @@ extension СhartViewModel {
                 (formatter.date(from: "2022-01-26T02:45")!, 49),
                 (formatter.date(from: "2022-01-26T02:50")!, 49),
                 (formatter.date(from: "2022-01-26T02:55")!, 49),
-                (formatter.date(from: "2022-01-26T03:00")!, 50)
+                (formatter.date(from: "2022-01-26T03:00")!, 45),
+                (formatter.date(from: "2022-01-26T03:05")!, 55),
+                (formatter.date(from: "2022-01-26T03:10")!, 55),
+                (formatter.date(from: "2022-01-26T03:20")!, 60),
+                (formatter.date(from: "2022-01-26T03:30")!, 60),
+                (formatter.date(from: "2022-01-26T03:40")!, 60),
+                (formatter.date(from: "2022-01-26T03:50")!, 50),
+                (formatter.date(from: "2022-01-26T04:10")!, 49),
+                (formatter.date(from: "2022-01-26T04:20")!, 45),
+                (formatter.date(from: "2022-01-26T04:30")!, 50),
+                (formatter.date(from: "2022-01-26T04:40")!, 50),
+                (formatter.date(from: "2022-01-26T04:50")!, 50),
             ]
         )
     }
