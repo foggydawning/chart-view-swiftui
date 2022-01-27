@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct СhartModel {
-    let titleIcon: Image
+    let titleImageName: String
     let titleText: String
     let accentColor: Color
-    var subtitles: [String]
-    var minValue: (Int, Double)
-    var maxValue: (Int, Double)
+    var subtitle: String
+    var values: [(Date, Double)]
+    var minValue: (Int, Double)? = nil
+    var maxValue: (Int, Double)? = nil
+    var startDate: Date? = nil
+    var endDate: Date? = nil
 }
