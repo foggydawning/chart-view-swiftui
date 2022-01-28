@@ -14,8 +14,8 @@ struct СhartModel {
     let accentColor: Color
     var subtitle: String
     var values: [(Date, Double)]
-    var minValue: (Int, Double)? = nil
-    var maxValue: (Int, Double)? = nil
+    var minValue: Double? = nil
+    var maxValue: Double? = nil
     var startDate: Date? = nil
     var endDate: Date? = nil
 }

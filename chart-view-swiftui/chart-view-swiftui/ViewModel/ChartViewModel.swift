@@ -10,7 +10,7 @@ import Combine
 import Foundation
 
 
-final class СhartViewModel: ObservableObject {
+final class ChartViewModel: ObservableObject {
     var objectWillChange = ObservableObjectPublisher()
     
     var model: СhartModel
@@ -20,23 +20,37 @@ final class СhartViewModel: ObservableObject {
     }
     
     init(){
-        self.model = СhartViewModel.fetchModel()
+        self.model = ChartViewModel.fetchModel()
     }
-    
-
 }
 
 // MARK: Distribute Values By Intervals
-extension СhartViewModel {
+extension ChartViewModel {
     
     func distributeValuesByIntervals(){
         sortValueList()
         setStartEndDate()
+        setMinMaxValue()
         setNumberOfIntervals()
         setEmptyArraysForValueByIntervals()
         distributeValues()
     }
     
+    private func setMinMaxValue(){
+        var min: Double = Double.infinity
+        var max: Double = 0
+        for value in self.model.values {
+            if min > value.1 {
+                min = value.1
+            }
+            if max < value.1 {
+                max = value.1
+            }
+        }
+        self.model.minValue = min
+        self.model.maxValue = max
+        
+    }
     private func sortValueList(){
         self.model.values = self.model.values.sorted(by: {first, second in
             first.0 < second.0
@@ -86,11 +100,15 @@ extension СhartViewModel {
                 currentIntervalNumber += 1
             }
         }
+        if self.valueByIntervals.last?.isEmpty ?? false {
+            _ = self.valueByIntervals.popLast()
+            self.numberOfIntervals -= 1
+        }
     }
 }
 
 // MARK: Test Data
-extension СhartViewModel {
+extension ChartViewModel {
     private static func fetchModel() -> СhartModel{
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
@@ -135,8 +153,23 @@ extension СhartViewModel {
                 (formatter.date(from: "2022-01-26T04:10")!, 49),
                 (formatter.date(from: "2022-01-26T04:20")!, 45),
                 (formatter.date(from: "2022-01-26T04:30")!, 50),
-                (formatter.date(from: "2022-01-26T04:40")!, 50),
-                (formatter.date(from: "2022-01-26T04:50")!, 50),
+                (formatter.date(from: "2022-01-26T04:40")!, 55),
+                (formatter.date(from: "2022-01-26T04:50")!, 55),
+                (formatter.date(from: "2022-01-26T05:00")!, 60),
+                (formatter.date(from: "2022-01-26T05:10")!, 65),
+                (formatter.date(from: "2022-01-26T05:20")!, 70),
+                (formatter.date(from: "2022-01-26T05:25")!, 75),
+                (formatter.date(from: "2022-01-26T05:37")!, 75),
+                (formatter.date(from: "2022-01-26T05:40")!, 75),
+                (formatter.date(from: "2022-01-26T05:50")!, 80),
+                (formatter.date(from: "2022-01-26T05:59")!, 85),
+                (formatter.date(from: "2022-01-26T06:00")!, 85),
+                (formatter.date(from: "2022-01-26T06:01")!, 70),
+                (formatter.date(from: "2022-01-26T06:10")!, 70),
+                (formatter.date(from: "2022-01-26T06:20")!, 60),
+                (formatter.date(from: "2022-01-26T06:30")!, 55),
+                (formatter.date(from: "2022-01-26T06:40")!, 60),
+                (formatter.date(from: "2022-01-26T06:55")!, 40),
             ]
         )
     }

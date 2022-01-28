@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ScrollView {
-            СhartView()
+            СhartView(viewModel: ChartViewModel())
                 .frame(width: UIScreen.main.bounds.width,
                        height: UIScreen.main.bounds.width)
         }
