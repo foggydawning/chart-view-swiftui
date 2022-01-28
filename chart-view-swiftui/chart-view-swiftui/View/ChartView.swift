@@ -14,8 +14,8 @@ struct ChartView: View {
         GeometryReader { internalGeometry in
             HStack(alignment: .top , spacing: 0){
                 Spacer().frame(width: 10)
-                ForEach(0 ..< self.viewModel.colomnsForRendering.count, id: \.self){ i in
-                    let colomn: (CGFloat, CGFloat) = self.viewModel.colomnsForRendering[i]
+                ForEach(0 ..< viewModel.colomnsForRendering.count, id: \.self){ i in
+                    let colomn: (CGFloat, CGFloat) = viewModel.colomnsForRendering[i]
                     VStack{
                         Spacer().frame(height: colomn.0*viewModel.model.sizeCoefficient)
                         Rectangle()
@@ -29,7 +29,7 @@ struct ChartView: View {
             }.onAppear(perform: {
                 let width: CGFloat = internalGeometry.size.width
                 let height: CGFloat = internalGeometry.size.height
-                self.viewModel.setColomnsForRendering(width: width, height: height)
+                viewModel.setColomnsForRendering(width: width, height: height)
             })
         }
     }

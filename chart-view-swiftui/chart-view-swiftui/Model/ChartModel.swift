@@ -10,8 +10,11 @@ import Foundation
 
 struct СhartModel {
     var values: [(Date, Double)]
-    var minValue: Double? = nil
-    var maxValue: Double? = nil
+    var numberOfIntervals: Int = 0
+    var valueByIntervals: [[Double]] = []
+    
+    var minValue: Double = 0
+    var maxValue: Double = 1
     var startDate: Date? = nil
     var endDate: Date? = nil
     

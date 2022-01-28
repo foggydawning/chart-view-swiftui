@@ -13,11 +13,11 @@ struct ChartBlockView: View {
     
     var body: some View {
         VStack(spacing: 0){
-            Title(imageName: self.viewModel.model.titleImageName,
-                  text: self.viewModel.model.titleText,
-                  color: self.viewModel.model.accentColor)
+            Title(imageName: viewModel.model.titleImageName,
+                  text: viewModel.model.titleText,
+                  color: viewModel.model.accentColor)
             Spacer()
-            Subtitle(text: self.viewModel.model.subtitle)
+            Subtitle(text: viewModel.model.subtitle)
             Spacer()
             DividingLine()
             Spacer()
@@ -28,7 +28,7 @@ struct ChartBlockView: View {
                         VStack {
                             Text("МАКС.")
                                 .font(.system(size: 12, weight: .bold, design: .default))
-                            Text(String(format: "%.1f", viewModel.chartViewModel.model.maxValue ?? 100))
+                            Text(String(format: "%.1f", viewModel.chartViewModel.model.maxValue))
                                 .font(.system(size: 20, weight: .semibold, design: .default))
                         }
                         
@@ -40,7 +40,7 @@ struct ChartBlockView: View {
                         VStack {
                             Text("МИН.")
                                 .font(.system(size: 12, weight: .bold, design: .default))
-                            Text(String(viewModel.chartViewModel.model.minValue ?? 0))
+                            Text(String(viewModel.chartViewModel.model.minValue))
                                 .font(.system(size: 20, weight: .semibold, design: .default))
                         }
                         Spacer()

@@ -10,18 +10,15 @@ import Combine
 import Foundation
 
 final class ChartViewModel: ObservableObject {
+    var model: СhartModel
     var objectWillChange = ObservableObjectPublisher()
     
-    var model: СhartModel
-    var valueByIntervals: [[Double]] = []
     var colomnsForRendering: [(CGFloat, CGFloat)] = [] {
         didSet {objectWillChange.send()}
     }
     
-    var numberOfIntervals: Int = 0
-    
     init(){
-        self.model = ChartViewModel.fetchModel()
+        model = ChartViewModel.fetchModel()
     }
 }
 
@@ -29,24 +26,24 @@ extension ChartViewModel {
     private func setColWidthAndSizeCoefficient(
         width: CGFloat,
         height: CGFloat) {
-            self.model.colWidth = self.getColWidth(
+            model.colWidth = getColWidth(
                 chartWidth: width,
-                distanceBetweenColumns: self.model.distanceBetweenColumns)
-            self.model.sizeCoefficient = self.getSizeCoefficient(
+                distanceBetweenColumns: model.distanceBetweenColumns)
+            model.sizeCoefficient = getSizeCoefficient(
                 chartHeight: height)
         }
     
     func setColomnsForRendering(width: CGFloat, height: CGFloat) {
         distributeValuesByIntervals()
         setColWidthAndSizeCoefficient(width: width, height: height)
-        for interval in valueByIntervals {
+        for interval in model.valueByIntervals {
             let max = interval.max() ?? 1
             let min = interval.min() ?? 0
-            let height: CGFloat = self.getColHeight(
+            let height: CGFloat = getColHeight(
                                     min: min,
                                     max: max)
-            let topSpacerHeight: CGFloat = self.getTopSpacerHeight(max: max)
-            self.colomnsForRendering.append((topSpacerHeight, height))
+            let topSpacerHeight: CGFloat = getTopSpacerHeight(max: max)
+            colomnsForRendering.append((topSpacerHeight, height))
         }
     }
 }
@@ -66,7 +63,7 @@ extension ChartViewModel {
     private func setMinMaxValue(){
         var min: Double = Double.infinity
         var max: Double = 0
-        for value in self.model.values {
+        for value in model.values {
             if min > value.1 {
                 min = value.1
             }
@@ -74,38 +71,38 @@ extension ChartViewModel {
                 max = value.1
             }
         }
-        self.model.minValue = min
-        self.model.maxValue = max
+        model.minValue = min
+        model.maxValue = max
         
     }
     private func sortValueList(){
-        self.model.values = self.model.values.sorted(by: {first, second in
+        model.values = model.values.sorted(by: {first, second in
             first.0 < second.0
         })
     }
     
     private func setStartEndDate() {
-        self.model.startDate = self.model.values[0].0
-        self.model.endDate = self.model.values.last!.0
+        model.startDate = model.values[0].0
+        model.endDate = model.values.last!.0
     }
     
     private func setNumberOfIntervals(){
-        guard let startDate = self.model.startDate else {return}
-        guard let endDate = self.model.endDate else {return}
+        guard let startDate = model.startDate else {return}
+        guard let endDate = model.endDate else {return}
         let dateInterval = DateInterval(start: startDate, end: endDate)
         let timeInterval: TimeInterval = dateInterval.duration / 60
         let numberOfIntervals: Int = Int(ceil((timeInterval / 30)))
-        self.numberOfIntervals = numberOfIntervals + 1
+        model.numberOfIntervals = numberOfIntervals + 1
     }
     
     private func setEmptyArraysForValueByIntervals(){
-        for _ in 0 ..< self.numberOfIntervals {
-            self.valueByIntervals.append([])
+        for _ in 0 ..< model.numberOfIntervals {
+            model.valueByIntervals.append([])
         }
     }
     
     private func distributeValues(){
-        guard let startDate = self.model.startDate else {return}
+        guard let startDate = model.startDate else {return}
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
         let startDateString = formatter.string(from: startDate)
@@ -116,20 +113,20 @@ extension ChartViewModel {
         let extraSecondsTI = TimeInterval(extraSecondsInt*60)
         let correctedStartDate = startDate - extraSecondsTI
         var currentIntervalNumber: Int = 0
-        for value in self.model.values {
+        for value in model.values {
             let endOfTheInterval = Date(
                 timeInterval: TimeInterval(60*30*(currentIntervalNumber+1)),
                 since: correctedStartDate )
             if value.0 < endOfTheInterval {
-                self.valueByIntervals[currentIntervalNumber].append(value.1)
+                model.valueByIntervals[currentIntervalNumber].append(value.1)
             } else {
-                self.valueByIntervals[currentIntervalNumber+1].append(value.1)
+                model.valueByIntervals[currentIntervalNumber+1].append(value.1)
                 currentIntervalNumber += 1
             }
         }
-        if self.valueByIntervals.last?.isEmpty ?? false {
-            _ = self.valueByIntervals.popLast()
-            self.numberOfIntervals -= 1
+        if model.valueByIntervals.last?.isEmpty ?? false {
+            _ = model.valueByIntervals.popLast()
+            model.numberOfIntervals -= 1
         }
     }
 }
@@ -142,23 +139,23 @@ extension ChartViewModel {
         let numerator = CGFloat(
             chartWidth
             - 20.0
-            - distanceBetweenColumns * CGFloat((self.numberOfIntervals-1))
+            - distanceBetweenColumns * CGFloat((model.numberOfIntervals-1))
         )
-        let denominator = CGFloat(self.numberOfIntervals)
+        let denominator = CGFloat(model.numberOfIntervals)
         return numerator / denominator
     }
     
     func getSizeCoefficient (
         chartHeight: CGFloat ) -> CGFloat {
-            let maxValue: CGFloat = self.model.maxValue ?? 1
-            let minValue: CGFloat = self.model.minValue ?? 0
+            let maxValue: CGFloat = model.maxValue
+            let minValue: CGFloat = model.minValue
             return chartHeight / (maxValue - minValue)
     }
     
     func getColHeight (
         min: Double,
         max: Double ) -> CGFloat{
-            let defaultValue: CGFloat = self.model.colWidth / self.model.sizeCoefficient
+            let defaultValue: CGFloat = model.colWidth / model.sizeCoefficient
             let teoreticalValue: CGFloat = max - min
             if max == min || teoreticalValue < defaultValue {
                 return defaultValue
@@ -168,7 +165,7 @@ extension ChartViewModel {
     }
     
     func getTopSpacerHeight(max: Double) -> CGFloat {
-        CGFloat((self.model.maxValue ?? 1) - max)
+        CGFloat((model.maxValue) - max)
     }
     
 }
