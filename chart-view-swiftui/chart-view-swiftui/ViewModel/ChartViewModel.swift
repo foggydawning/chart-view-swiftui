@@ -107,6 +107,44 @@ extension ChartViewModel {
     }
 }
 
+// MARK: Funcs For Calculate View
+extension ChartViewModel {
+    func getColWidth(chartWidth: CGFloat) -> CGFloat {
+        let numerator = CGFloat(chartWidth - 20.0 - 5.0 * CGFloat((self.numberOfIntervals-1)))
+        let denominator = CGFloat(self.numberOfIntervals)
+        return numerator / denominator
+    }
+    
+    func getSizeCoefficient(
+        minValue: CGFloat,
+        maxValue: CGFloat,
+        chartHeight: CGFloat
+    ) -> CGFloat {
+        CGFloat(chartHeight / (maxValue - minValue))
+    }
+    
+    func getColHeight(
+        min: Double,
+        max: Double,
+        sizeCoefficient: CGFloat,
+        colWidth: CGFloat
+    ) -> CGFloat{
+        if max == min {
+            return colWidth / sizeCoefficient
+        } else {
+            if max - min < colWidth / sizeCoefficient {
+                return colWidth / sizeCoefficient
+            }
+            return max - min
+        }
+    }
+    
+    func getTopSpacerHeight(max: Double) -> CGFloat {
+        CGFloat((self.model.maxValue ?? 1) - max)
+    }
+    
+}
+
 // MARK: Test Data
 extension ChartViewModel {
     private static func fetchModel() -> СhartModel{

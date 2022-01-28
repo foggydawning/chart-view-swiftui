@@ -29,39 +29,27 @@ struct СhartView: View {
                         Spacer()
                     }
                     GeometryReader { internalGeometry in
-                        let colWidth: CGFloat = {
-                            let numberOfIntervals = CGFloat(self.viewModel.numberOfIntervals)
-                            let colWidth: CGFloat = (internalGeometry.size.width
-                            - 20.0 - 5.0*(numberOfIntervals-1)) / numberOfIntervals
-                            return colWidth
-                        }()
-                        let sizeCoefficient: CGFloat = {
-                            let min: CGFloat = self.viewModel.model.minValue ?? 0
-                            let max: CGFloat = self.viewModel.model.maxValue ?? 1
-                            return internalGeometry.size.height / (max - min)
-                        }()
+                        let width: CGFloat = internalGeometry.size.width
+                        let height: CGFloat = internalGeometry.size.height
+                        let minValue: Double = self.viewModel.model.minValue ?? 0
+                        let maxValue: Double = self.viewModel.model.maxValue ?? 1
+                        let colWidth: CGFloat = viewModel.getColWidth(chartWidth: width)
+                        let sizeCoefficient: CGFloat = viewModel.getSizeCoefficient(
+                            minValue: minValue,
+                            maxValue: maxValue,
+                            chartHeight: height)
                         HStack(alignment: .top , spacing: 0){
                             Spacer().frame(width: 10)
                             ForEach(self.viewModel.valueByIntervals, id: \.self){ interval in
+                                let max = interval.max() ?? 1
+                                let min = interval.min() ?? 0
+                                let height: CGFloat = viewModel.getColHeight(
+                                    min: min,
+                                    max: max,
+                                    sizeCoefficient: sizeCoefficient,
+                                    colWidth: colWidth)
                                 
-                                let height: CGFloat = {
-                                    let max = interval.max() ?? 1
-                                    let min = interval.min() ?? 0
-                                    if max == min {
-                                        return colWidth / sizeCoefficient
-                                    } else {
-                                        if max - min < colWidth / sizeCoefficient {
-                                            return colWidth / sizeCoefficient
-                                        }
-                                        return max - min
-                                    }
-                                }()
-                                
-                                let topSpacerHeight: CGFloat = {
-                                    let max = interval.max() ?? 1
-                                    let globalMax = self.viewModel.model.maxValue ?? 1
-                                    return CGFloat(globalMax - max)
-                                }()
+                                let topSpacerHeight: CGFloat = viewModel.getTopSpacerHeight(max: max)
                                 
                                 VStack{
                                     Spacer().frame(height: topSpacerHeight*sizeCoefficient)
