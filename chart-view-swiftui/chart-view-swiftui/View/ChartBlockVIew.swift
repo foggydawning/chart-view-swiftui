@@ -23,28 +23,9 @@ struct ChartBlockView: View {
             Spacer()
             GeometryReader { geometry in
                 VStack(spacing: 0){
-                    HStack {
-                        Spacer()
-                        VStack {
-                            Text("МАКС.")
-                                .font(.system(size: 12, weight: .bold, design: .default))
-                            Text(String(format: "%.1f", viewModel.chartViewModel.model.maxValue))
-                                .font(.system(size: 20, weight: .semibold, design: .default))
-                        }
-                        
-                        Spacer()
-                    }
+                    MinMaxValueView(viewModel: viewModel.maxValueViewModel)
                     ChartView(viewModel: viewModel.chartViewModel)
-                    HStack {
-                        Spacer()
-                        VStack {
-                            Text("МИН.")
-                                .font(.system(size: 12, weight: .bold, design: .default))
-                            Text(String(viewModel.chartViewModel.model.minValue))
-                                .font(.system(size: 20, weight: .semibold, design: .default))
-                        }
-                        Spacer()
-                    }
+                    MinMaxValueView(viewModel: viewModel.minValueViewModel)
                     Spacer()
                     HStack {
                         Color(.black)

@@ -10,6 +10,10 @@
 		D310214F27A408E3004D9E97 /* ChartBlockViewMovel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310214E27A408E3004D9E97 /* ChartBlockViewMovel.swift */; };
 		D310215127A40934004D9E97 /* ChartBlockVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310215027A40934004D9E97 /* ChartBlockVIew.swift */; };
 		D310215327A4158C004D9E97 /* ChartBlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310215227A4158C004D9E97 /* ChartBlockModel.swift */; };
+		D314978C27A485EE003B63D8 /* MinMaxValueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314978B27A485EE003B63D8 /* MinMaxValueViewModel.swift */; };
+		D314978E27A48704003B63D8 /* MinMaxValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314978D27A48704003B63D8 /* MinMaxValueModel.swift */; };
+		D314979027A48A29003B63D8 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314978F27A48A29003B63D8 /* General.swift */; };
+		D314979227A48D20003B63D8 /* MinMaxValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314979127A48D20003B63D8 /* MinMaxValueView.swift */; };
 		D35AF9C327A19A86001A8A5B /* Сhart_view_swiftuiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF9C227A19A86001A8A5B /* Сhart_view_swiftuiApp.swift */; };
 		D35AF9C527A19A86001A8A5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35AF9C427A19A86001A8A5B /* ContentView.swift */; };
 		D35AF9C727A19A88001A8A5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D35AF9C627A19A88001A8A5B /* Assets.xcassets */; };
@@ -23,6 +27,10 @@
 		D310214E27A408E3004D9E97 /* ChartBlockViewMovel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBlockViewMovel.swift; sourceTree = "<group>"; };
 		D310215027A40934004D9E97 /* ChartBlockVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBlockVIew.swift; sourceTree = "<group>"; };
 		D310215227A4158C004D9E97 /* ChartBlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBlockModel.swift; sourceTree = "<group>"; };
+		D314978B27A485EE003B63D8 /* MinMaxValueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinMaxValueViewModel.swift; sourceTree = "<group>"; };
+		D314978D27A48704003B63D8 /* MinMaxValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinMaxValueModel.swift; sourceTree = "<group>"; };
+		D314978F27A48A29003B63D8 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		D314979127A48D20003B63D8 /* MinMaxValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinMaxValueView.swift; sourceTree = "<group>"; };
 		D35AF9BF27A19A86001A8A5B /* chart-view-swiftui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chart-view-swiftui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35AF9C227A19A86001A8A5B /* Сhart_view_swiftuiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сhart_view_swiftuiApp.swift"; sourceTree = "<group>"; };
 		D35AF9C427A19A86001A8A5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +75,7 @@
 				D35AF9D327A19B80001A8A5B /* Model */,
 				D35AF9D127A19B53001A8A5B /* View */,
 				D35AF9D227A19B5E001A8A5B /* ViewModel */,
+				D314978F27A48A29003B63D8 /* General.swift */,
 				D35AF9C627A19A88001A8A5B /* Assets.xcassets */,
 				D35AF9C827A19A88001A8A5B /* Preview Content */,
 			);
@@ -95,6 +104,7 @@
 				D35AF9C427A19A86001A8A5B /* ContentView.swift */,
 				D35AF9D627A1A191001A8A5B /* ChartView.swift */,
 				D310215027A40934004D9E97 /* ChartBlockVIew.swift */,
+				D314979127A48D20003B63D8 /* MinMaxValueView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -104,6 +114,7 @@
 			children = (
 				D35AF9D427A1A186001A8A5B /* ChartViewModel.swift */,
 				D310214E27A408E3004D9E97 /* ChartBlockViewMovel.swift */,
+				D314978B27A485EE003B63D8 /* MinMaxValueViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -113,6 +124,7 @@
 			children = (
 				D35AF9D827A1A1A4001A8A5B /* ChartModel.swift */,
 				D310215227A4158C004D9E97 /* ChartBlockModel.swift */,
+				D314978D27A48704003B63D8 /* MinMaxValueModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,12 +200,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D35AF9D527A1A186001A8A5B /* ChartViewModel.swift in Sources */,
+				D314979027A48A29003B63D8 /* General.swift in Sources */,
 				D35AF9C527A19A86001A8A5B /* ContentView.swift in Sources */,
 				D35AF9C327A19A86001A8A5B /* Сhart_view_swiftuiApp.swift in Sources */,
 				D310215127A40934004D9E97 /* ChartBlockVIew.swift in Sources */,
+				D314978C27A485EE003B63D8 /* MinMaxValueViewModel.swift in Sources */,
+				D314978E27A48704003B63D8 /* MinMaxValueModel.swift in Sources */,
 				D310214F27A408E3004D9E97 /* ChartBlockViewMovel.swift in Sources */,
 				D35AF9D727A1A191001A8A5B /* ChartView.swift in Sources */,
 				D310215327A4158C004D9E97 /* ChartBlockModel.swift in Sources */,
+				D314979227A48D20003B63D8 /* MinMaxValueView.swift in Sources */,
 				D35AF9D927A1A1A4001A8A5B /* ChartModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

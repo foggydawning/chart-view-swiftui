@@ -12,6 +12,7 @@ import Foundation
 final class ChartViewModel: ObservableObject {
     var model: СhartModel
     var objectWillChange = ObservableObjectPublisher()
+    var minMaxValuePublisher = PassthroughSubject<(Double, MinMaxEnum), Never>()
     
     var colomnsForRendering: [(CGFloat, CGFloat)] = [] {
         didSet {objectWillChange.send()}
@@ -20,18 +21,6 @@ final class ChartViewModel: ObservableObject {
     init(){
         model = ChartViewModel.fetchModel()
     }
-}
-
-extension ChartViewModel {
-    private func setColWidthAndSizeCoefficient(
-        width: CGFloat,
-        height: CGFloat) {
-            model.colWidth = getColWidth(
-                chartWidth: width,
-                distanceBetweenColumns: model.distanceBetweenColumns)
-            model.sizeCoefficient = getSizeCoefficient(
-                chartHeight: height)
-        }
     
     func setColomnsForRendering(width: CGFloat, height: CGFloat) {
         distributeValuesByIntervals()
@@ -73,6 +62,8 @@ extension ChartViewModel {
         }
         model.minValue = min
         model.maxValue = max
+        minMaxValuePublisher.send((min, .min))
+        minMaxValuePublisher.send((max, .max))
         
     }
     private func sortValueList(){
@@ -129,6 +120,16 @@ extension ChartViewModel {
             model.numberOfIntervals -= 1
         }
     }
+    
+    private func setColWidthAndSizeCoefficient(
+        width: CGFloat,
+        height: CGFloat) {
+            model.colWidth = getColWidth(
+                chartWidth: width,
+                distanceBetweenColumns: model.distanceBetweenColumns)
+            model.sizeCoefficient = getSizeCoefficient(
+                chartHeight: height)
+        }
 }
 
 // MARK: Funcs For Calculate View
