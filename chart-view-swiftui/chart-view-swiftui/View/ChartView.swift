@@ -10,6 +10,7 @@ import SwiftUI
 struct СhartView: View {
     @ObservedObject var viewModel: ChartViewModel
     let margin: CGFloat = 15
+    let distanceBetweenColumns: CGFloat = 5
     
     var body: some View {
         VStack(spacing: 0){
@@ -25,15 +26,23 @@ struct СhartView: View {
                 VStack(spacing: 0){
                     HStack {
                         Spacer()
-                        Text("68")
+                        VStack {
+                            Text("МАКС.")
+                                .font(.system(size: 12, weight: .bold, design: .default))
+                            Text(String(format: "%.1f", viewModel.model.maxValue?.1 ?? 100))
+                                .font(.system(size: 20, weight: .semibold, design: .default))
+                        }
+                        
                         Spacer()
                     }
                     GeometryReader { internalGeometry in
                         let width: CGFloat = internalGeometry.size.width
                         let height: CGFloat = internalGeometry.size.height
-                        let minValue: Double = self.viewModel.model.minValue ?? 0
-                        let maxValue: Double = self.viewModel.model.maxValue ?? 1
-                        let colWidth: CGFloat = viewModel.getColWidth(chartWidth: width)
+                        let minValue: Double = self.viewModel.model.minValue?.1 ?? 0
+                        let maxValue: Double = self.viewModel.model.maxValue?.1 ?? 1
+                        let colWidth: CGFloat = viewModel.getColWidth(
+                            chartWidth: width,
+                            distanceBetweenColumns: distanceBetweenColumns)
                         let sizeCoefficient: CGFloat = viewModel.getSizeCoefficient(
                             minValue: minValue,
                             maxValue: maxValue,
@@ -54,20 +63,24 @@ struct СhartView: View {
                                 VStack{
                                     Spacer().frame(height: topSpacerHeight*sizeCoefficient)
                                     Rectangle()
-                                        .foregroundColor(viewModel.model.accentColor)
                                         .frame(width: colWidth, height: height*sizeCoefficient)
                                         .cornerRadius(30)
                                     Spacer()
                                     
                                 }
-                                Spacer().frame(width: 5)
+                                Spacer().frame(width: distanceBetweenColumns)
                             }
-                            Spacer().frame(width: 5)
+                            Spacer().frame(width: 10-distanceBetweenColumns)
                         }
                     }
                     HStack {
                         Spacer()
-                        Text("45")
+                        VStack {
+                            Text("МИН.")
+                                .font(.system(size: 12, weight: .bold, design: .default))
+                            Text(String(viewModel.model.minValue?.1 ?? 0))
+                                .font(.system(size: 20, weight: .semibold, design: .default))
+                        }
                         Spacer()
                     }
                     Spacer()
@@ -75,7 +88,8 @@ struct СhartView: View {
                         Color(.black)
                             .frame(height: 20)
                     }
-                }
+                    Spacer().frame(height: 10)
+                }.foregroundColor(viewModel.model.accentColor)
             }
         }
         .padding(margin)
@@ -115,7 +129,6 @@ struct СhartView: View {
             Rectangle()
                 .frame(height: 0.3)
                 .cornerRadius(10)
-                .padding([.leading,.trailing], 6)
                 .foregroundColor(Color.gray.opacity(0.7))
                 
         }

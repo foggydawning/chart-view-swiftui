@@ -39,16 +39,22 @@ extension ChartViewModel {
     private func setMinMaxValue(){
         var min: Double = Double.infinity
         var max: Double = 0
+        var minPos: Int = 0
+        var maxPos: Int = 0
+        var curPos: Int = 0
         for value in self.model.values {
             if min > value.1 {
                 min = value.1
+                minPos = curPos
             }
             if max < value.1 {
                 max = value.1
+                maxPos = curPos
             }
+            curPos += 1
         }
-        self.model.minValue = min
-        self.model.maxValue = max
+        self.model.minValue = (minPos, min)
+        self.model.maxValue = (maxPos, max)
         
     }
     private func sortValueList(){
@@ -109,8 +115,14 @@ extension ChartViewModel {
 
 // MARK: Funcs For Calculate View
 extension ChartViewModel {
-    func getColWidth(chartWidth: CGFloat) -> CGFloat {
-        let numerator = CGFloat(chartWidth - 20.0 - 5.0 * CGFloat((self.numberOfIntervals-1)))
+    func getColWidth(
+        chartWidth: CGFloat,
+        distanceBetweenColumns: CGFloat) -> CGFloat {
+        let numerator = CGFloat(
+            chartWidth
+            - 20.0
+            - distanceBetweenColumns * CGFloat((self.numberOfIntervals-1))
+        )
         let denominator = CGFloat(self.numberOfIntervals)
         return numerator / denominator
     }
@@ -140,7 +152,7 @@ extension ChartViewModel {
     }
     
     func getTopSpacerHeight(max: Double) -> CGFloat {
-        CGFloat((self.model.maxValue ?? 1) - max)
+        CGFloat((self.model.maxValue?.1 ?? 1) - max)
     }
     
 }
@@ -208,6 +220,13 @@ extension ChartViewModel {
                 (formatter.date(from: "2022-01-26T06:30")!, 55),
                 (formatter.date(from: "2022-01-26T06:40")!, 60),
                 (formatter.date(from: "2022-01-26T06:55")!, 40),
+                (formatter.date(from: "2022-01-26T07:10")!, 85),
+                (formatter.date(from: "2022-01-26T07:21")!, 70),
+                (formatter.date(from: "2022-01-26T07:30")!, 70),
+                (formatter.date(from: "2022-01-26T07:40")!, 68),
+                (formatter.date(from: "2022-01-26T07:50")!, 64),
+                (formatter.date(from: "2022-01-26T07:55")!, 60),
+                (formatter.date(from: "2022-01-26T08:00")!, 60),
             ]
         )
     }
