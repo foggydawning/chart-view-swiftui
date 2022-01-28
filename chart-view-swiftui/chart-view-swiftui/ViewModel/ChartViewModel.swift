@@ -9,25 +9,52 @@ import SwiftUI
 import Combine
 import Foundation
 
-
 final class ChartViewModel: ObservableObject {
     var objectWillChange = ObservableObjectPublisher()
     
     var model: СhartModel
     var valueByIntervals: [[Double]] = []
-    var numberOfIntervals: Int = 0 {
+    var colomnsForRendering: [(CGFloat, CGFloat)] = [] {
         didSet {objectWillChange.send()}
     }
+    
+    var numberOfIntervals: Int = 0
     
     init(){
         self.model = ChartViewModel.fetchModel()
     }
 }
 
+extension ChartViewModel {
+    private func setColWidthAndSizeCoefficient(
+        width: CGFloat,
+        height: CGFloat) {
+            self.model.colWidth = self.getColWidth(
+                chartWidth: width,
+                distanceBetweenColumns: self.model.distanceBetweenColumns)
+            self.model.sizeCoefficient = self.getSizeCoefficient(
+                chartHeight: height)
+        }
+    
+    func setColomnsForRendering(width: CGFloat, height: CGFloat) {
+        distributeValuesByIntervals()
+        setColWidthAndSizeCoefficient(width: width, height: height)
+        for interval in valueByIntervals {
+            let max = interval.max() ?? 1
+            let min = interval.min() ?? 0
+            let height: CGFloat = self.getColHeight(
+                                    min: min,
+                                    max: max)
+            let topSpacerHeight: CGFloat = self.getTopSpacerHeight(max: max)
+            self.colomnsForRendering.append((topSpacerHeight, height))
+        }
+    }
+}
+
 // MARK: Distribute Values By Intervals
 extension ChartViewModel {
     
-    func distributeValuesByIntervals(){
+    private func distributeValuesByIntervals(){
         sortValueList()
         setStartEndDate()
         setMinMaxValue()
@@ -39,22 +66,16 @@ extension ChartViewModel {
     private func setMinMaxValue(){
         var min: Double = Double.infinity
         var max: Double = 0
-        var minPos: Int = 0
-        var maxPos: Int = 0
-        var curPos: Int = 0
         for value in self.model.values {
             if min > value.1 {
                 min = value.1
-                minPos = curPos
             }
             if max < value.1 {
                 max = value.1
-                maxPos = curPos
             }
-            curPos += 1
         }
-        self.model.minValue = (minPos, min)
-        self.model.maxValue = (maxPos, max)
+        self.model.minValue = min
+        self.model.maxValue = max
         
     }
     private func sortValueList(){
@@ -115,9 +136,9 @@ extension ChartViewModel {
 
 // MARK: Funcs For Calculate View
 extension ChartViewModel {
-    func getColWidth(
+    func getColWidth (
         chartWidth: CGFloat,
-        distanceBetweenColumns: CGFloat) -> CGFloat {
+        distanceBetweenColumns: CGFloat ) -> CGFloat {
         let numerator = CGFloat(
             chartWidth
             - 20.0
@@ -127,32 +148,27 @@ extension ChartViewModel {
         return numerator / denominator
     }
     
-    func getSizeCoefficient(
-        minValue: CGFloat,
-        maxValue: CGFloat,
-        chartHeight: CGFloat
-    ) -> CGFloat {
-        CGFloat(chartHeight / (maxValue - minValue))
+    func getSizeCoefficient (
+        chartHeight: CGFloat ) -> CGFloat {
+            let maxValue: CGFloat = self.model.maxValue ?? 1
+            let minValue: CGFloat = self.model.minValue ?? 0
+            return chartHeight / (maxValue - minValue)
     }
     
-    func getColHeight(
+    func getColHeight (
         min: Double,
-        max: Double,
-        sizeCoefficient: CGFloat,
-        colWidth: CGFloat
-    ) -> CGFloat{
-        if max == min {
-            return colWidth / sizeCoefficient
-        } else {
-            if max - min < colWidth / sizeCoefficient {
-                return colWidth / sizeCoefficient
+        max: Double ) -> CGFloat{
+            let defaultValue: CGFloat = self.model.colWidth / self.model.sizeCoefficient
+            let teoreticalValue: CGFloat = max - min
+            if max == min || teoreticalValue < defaultValue {
+                return defaultValue
+            } else {
+                return teoreticalValue
             }
-            return max - min
-        }
     }
     
     func getTopSpacerHeight(max: Double) -> CGFloat {
-        CGFloat((self.model.maxValue?.1 ?? 1) - max)
+        CGFloat((self.model.maxValue ?? 1) - max)
     }
     
 }
@@ -165,10 +181,6 @@ extension ChartViewModel {
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         
         return СhartModel(
-            titleImageName: "heart.fill",
-            titleText: "Пульс: сон",
-            accentColor: Color("Heart"),
-            subtitle: "Вот последние данные о Вашем пульсе во время сна.",
             values: [
                 (formatter.date(from: "2022-01-26T00:10")!, 68),
                 (formatter.date(from: "2022-01-26T00:20")!, 68),

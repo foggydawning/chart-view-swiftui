@@ -10,9 +10,15 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ScrollView {
-            СhartView(viewModel: ChartViewModel())
-                .frame(width: UIScreen.main.bounds.width,
-                       height: UIScreen.main.bounds.width)
+            ChartBlockView(viewModel: ChartBlockViewMovel(
+                model: .init(
+                    titleImageName: "heart.fill",
+                    titleText: "Пульс: сон",
+                    accentColor: Color("Heart"),
+                    subtitle: "Вот последние данные о Вашем пульсе во время сна."),
+                chartViewModel: .init()
+            )).frame(width: UIScreen.main.bounds.width,
+                     height: UIScreen.main.bounds.width)
         }
         .background(Color.gray)
     }

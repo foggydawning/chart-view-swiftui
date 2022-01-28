@@ -9,13 +9,15 @@ import SwiftUI
 import Foundation
 
 struct СhartModel {
-    let titleImageName: String
-    let titleText: String
-    let accentColor: Color
-    var subtitle: String
     var values: [(Date, Double)]
-    var minValue: (Int, Double)? = nil
-    var maxValue: (Int, Double)? = nil
+    var minValue: Double? = nil
+    var maxValue: Double? = nil
     var startDate: Date? = nil
     var endDate: Date? = nil
+    
+    var width: CGFloat? = nil
+    var height: CGFloat? = nil
+    var distanceBetweenColumns: CGFloat = 5
+    var colWidth: CGFloat = 5
+    var sizeCoefficient: CGFloat  = 1
 }
