@@ -10,7 +10,7 @@ import CoreGraphics
 
 final class MinMaxValueViewModel: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
-    private (set) var model = MinMaxValueModel() {
+    var model = MinMaxValueModel() {
         didSet {
             objectWillChange.send()
         }

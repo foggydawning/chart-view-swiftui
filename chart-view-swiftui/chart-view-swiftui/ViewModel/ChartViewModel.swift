@@ -12,7 +12,7 @@ import Foundation
 final class ChartViewModel: ObservableObject {
     var model: СhartModel
     var objectWillChange = ObservableObjectPublisher()
-    var minMaxValuePublisher = PassthroughSubject<(Double, MinMaxEnum), Never>()
+    var minMaxValuePublisher = PassthroughSubject<((Double, CGFloat), MinMaxEnum), Never>()
     
     var colomnsForRendering: [(CGFloat, CGFloat)] = [] {
         didSet {objectWillChange.send()}
@@ -24,22 +24,49 @@ final class ChartViewModel: ObservableObject {
     
     func setColomnsForRendering(width: CGFloat, height: CGFloat) {
         distributeValuesByIntervals()
+        setMinMaxValuePosition()
         setColWidthAndSizeCoefficient(width: width, height: height)
+        sendMinMaxValues()
         for interval in model.valueByIntervals {
+            if interval.isEmpty {
+                colomnsForRendering.append((.zero,.zero))
+                continue
+            }
             let max = interval.max() ?? 1
             let min = interval.min() ?? 0
             let height: CGFloat = getColHeight(
                                     min: min,
                                     max: max)
-            let topSpacerHeight: CGFloat = getTopSpacerHeight(max: max)
+            var topSpacerHeight: CGFloat = getTopSpacerHeight(max: max)
+            if (model.maxValue-model.minValue)*model.sizeCoefficient < height + topSpacerHeight {
+                topSpacerHeight -= height
+            }
             colomnsForRendering.append((topSpacerHeight, height))
         }
     }
 }
 
+
+// MARK: Data Flow
+extension ChartViewModel {
+    private func sendMinMaxValues() {
+        let minValue = model.minValue
+        let maxValue = model.maxValue
+        let minPos = CGFloat(model.minValuePosition)
+        let maxPos = CGFloat(model.maxValuePosition)
+        let colWidthPlusSpacerWidth = model.colWidth+model.distanceBetweenColumns
+        minMaxValuePublisher.send(
+            ((minValue, minPos*colWidthPlusSpacerWidth), .min)
+        )
+        minMaxValuePublisher.send(
+            ((maxValue, maxPos*colWidthPlusSpacerWidth), .max)
+        )
+    }
+}
+
+
 // MARK: Distribute Values By Intervals
 extension ChartViewModel {
-    
     private func distributeValuesByIntervals(){
         sortValueList()
         setStartEndDate()
@@ -47,6 +74,23 @@ extension ChartViewModel {
         setNumberOfIntervals()
         setEmptyArraysForValueByIntervals()
         distributeValues()
+    }
+    
+    private func setMinMaxValuePosition(){
+        var curPosition: Int = 0
+        var minPosDefined: Bool = false
+        var maxPosDefined: Bool = false
+        for interval in model.valueByIntervals {
+            if interval.contains(model.minValue) && !minPosDefined{
+                model.minValuePosition = curPosition
+                minPosDefined.toggle()
+            }
+            if interval.contains(model.maxValue) && !maxPosDefined {
+                model.maxValuePosition = curPosition
+                maxPosDefined.toggle()
+            }
+            curPosition += 1
+        }
     }
     
     private func setMinMaxValue(){
@@ -62,10 +106,8 @@ extension ChartViewModel {
         }
         model.minValue = min
         model.maxValue = max
-        minMaxValuePublisher.send((min, .min))
-        minMaxValuePublisher.send((max, .max))
-        
     }
+    
     private func sortValueList(){
         model.values = model.values.sorted(by: {first, second in
             first.0 < second.0
@@ -104,18 +146,20 @@ extension ChartViewModel {
         let extraSecondsTI = TimeInterval(extraSecondsInt*60)
         let correctedStartDate = startDate - extraSecondsTI
         var currentIntervalNumber: Int = 0
-        for value in model.values {
+        var currentValueNumber: Int = 0
+        while currentValueNumber < model.values.count {
+            let value = model.values[currentValueNumber]
             let endOfTheInterval = Date(
                 timeInterval: TimeInterval(60*30*(currentIntervalNumber+1)),
                 since: correctedStartDate )
             if value.0 < endOfTheInterval {
                 model.valueByIntervals[currentIntervalNumber].append(value.1)
+                currentValueNumber += 1
             } else {
-                model.valueByIntervals[currentIntervalNumber+1].append(value.1)
                 currentIntervalNumber += 1
             }
         }
-        if model.valueByIntervals.last?.isEmpty ?? false {
+        if model.valueByIntervals.last?.isEmpty == false {
             _ = model.valueByIntervals.popLast()
             model.numberOfIntervals -= 1
         }
@@ -131,6 +175,7 @@ extension ChartViewModel {
                 chartHeight: height)
         }
 }
+
 
 // MARK: Funcs For Calculate View
 extension ChartViewModel {
@@ -150,7 +195,11 @@ extension ChartViewModel {
         chartHeight: CGFloat ) -> CGFloat {
             let maxValue: CGFloat = model.maxValue
             let minValue: CGFloat = model.minValue
-            return chartHeight / (maxValue - minValue)
+            let diffirence: CGFloat = maxValue - minValue
+            if diffirence == 0 {
+                return 1
+            }
+            return chartHeight / diffirence
     }
     
     func getColHeight (
@@ -158,15 +207,15 @@ extension ChartViewModel {
         max: Double ) -> CGFloat{
             let defaultValue: CGFloat = model.colWidth / model.sizeCoefficient
             let teoreticalValue: CGFloat = max - min
-            if max == min || teoreticalValue < defaultValue {
-                return defaultValue
+            if max == min || teoreticalValue < defaultValue{
+                return defaultValue * model.sizeCoefficient
             } else {
-                return teoreticalValue
+                return teoreticalValue * model.sizeCoefficient
             }
     }
     
     func getTopSpacerHeight(max: Double) -> CGFloat {
-        CGFloat((model.maxValue) - max)
+        CGFloat((model.maxValue) - max) * model.sizeCoefficient
     }
     
 }
@@ -180,6 +229,15 @@ extension ChartViewModel {
         
         return СhartModel(
             values: [
+//                (formatter.date(from: "2022-01-26T00:10")!, 68),
+//
+//                (formatter.date(from: "2022-01-26T00:20")!, 75),
+//                (formatter.date(from: "2022-01-26T01:10")!, 68),
+//                (formatter.date(from: "2022-01-26T02:10")!, 68),
+//                (formatter.date(from: "2022-01-26T03:10")!, 70),
+//                (formatter.date(from: "2022-01-26T04:10")!, 68),
+//                (formatter.date(from: "2022-01-26T05:10")!, 68),
+//                (formatter.date(from: "2022-01-26T06:10")!, 68),
                 (formatter.date(from: "2022-01-26T00:10")!, 68),
                 (formatter.date(from: "2022-01-26T00:20")!, 68),
                 (formatter.date(from: "2022-01-26T00:30")!, 70),
@@ -237,6 +295,16 @@ extension ChartViewModel {
                 (formatter.date(from: "2022-01-26T07:50")!, 64),
                 (formatter.date(from: "2022-01-26T07:55")!, 60),
                 (formatter.date(from: "2022-01-26T08:00")!, 60),
+                (formatter.date(from: "2022-01-26T08:10")!, 65),
+                (formatter.date(from: "2022-01-26T08:20")!, 64),
+                (formatter.date(from: "2022-01-26T08:30")!, 63),
+                (formatter.date(from: "2022-01-26T08:40")!, 62),
+                (formatter.date(from: "2022-01-26T08:50")!, 61),
+                (formatter.date(from: "2022-01-26T09:05")!, 60),
+                (formatter.date(from: "2022-01-26T09:10")!, 63),
+                (formatter.date(from: "2022-01-26T09:15")!, 64),
+                (formatter.date(from: "2022-01-26T09:20")!, 60),
+                (formatter.date(from: "2022-01-26T09:25")!, 55),
             ]
         )
     }

@@ -12,33 +12,33 @@ struct ChartBlockView: View {
     let margin: CGFloat = 15
     
     var body: some View {
-        VStack(spacing: 0){
-            Title(imageName: viewModel.model.titleImageName,
-                  text: viewModel.model.titleText,
-                  color: viewModel.model.accentColor)
-            Spacer()
-            Subtitle(text: viewModel.model.subtitle)
-            Spacer()
-            DividingLine()
-            Spacer()
-            GeometryReader { geometry in
+        GeometryReader { geometry in
+            let height: CGFloat = geometry.size.height
+            VStack(spacing: 0){
+                Title(imageName: viewModel.model.titleImageName,
+                      text: viewModel.model.titleText,
+                      color: viewModel.model.accentColor)
+                Spacer()
+                Subtitle(text: viewModel.model.subtitle)
+                Spacer()
+                DividingLine()
+                Spacer()
                 VStack(spacing: 0){
                     MinMaxValueView(viewModel: viewModel.maxValueViewModel)
                     ChartView(viewModel: viewModel.chartViewModel)
                     MinMaxValueView(viewModel: viewModel.minValueViewModel)
-                    Spacer()
                     HStack {
                         Color(.black)
                             .frame(height: 20)
                     }
-                    Spacer().frame(height: 10)
+                    Spacer().frame(height: height*0.04)
                 }.foregroundColor(viewModel.model.accentColor)
             }
+            .padding(margin)
+            .background(Color.white)
+            .cornerRadius(10)
+            .padding(margin)
         }
-        .padding(margin)
-        .background(Color.white)
-        .cornerRadius(10)
-        .padding(margin)
     }
     
     private struct Subtitle: View {

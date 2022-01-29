@@ -15,11 +15,11 @@ struct СhartModel {
     
     var minValue: Double = 0
     var maxValue: Double = 1
+    var maxValuePosition: Int = 0
+    var minValuePosition: Int = 0
     var startDate: Date? = nil
     var endDate: Date? = nil
     
-    var width: CGFloat? = nil
-    var height: CGFloat? = nil
     var distanceBetweenColumns: CGFloat = 5
     var colWidth: CGFloat = 5
     var sizeCoefficient: CGFloat  = 1

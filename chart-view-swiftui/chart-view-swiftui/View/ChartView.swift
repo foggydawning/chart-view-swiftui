@@ -16,10 +16,13 @@ struct ChartView: View {
                 Spacer().frame(width: 10)
                 ForEach(0 ..< viewModel.colomnsForRendering.count, id: \.self){ i in
                     let colomn: (CGFloat, CGFloat) = viewModel.colomnsForRendering[i]
-                    VStack{
-                        Spacer().frame(height: colomn.0*viewModel.model.sizeCoefficient)
+                    let colHeight: CGFloat = colomn.1
+                    let topSpacerHeight: CGFloat = colomn.0
+                    VStack(spacing: 0){
+                        Spacer().frame(height: topSpacerHeight)
                         Rectangle()
-                            .frame(width: viewModel.model.colWidth, height: colomn.1*viewModel.model.sizeCoefficient)
+                            .frame(width: viewModel.model.colWidth,
+                                   height: colHeight)
                             .cornerRadius(30)
                         Spacer()
                     }

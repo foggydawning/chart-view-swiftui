@@ -27,9 +27,9 @@ final class ChartBlockViewMovel: ObservableObject {
             .sink(receiveValue: { value in
                 if value.1 == .max {
                     self.maxValueViewModel.updateModel(
-                        value: value.0,
+                        value: value.0.0,
                         text: value.1.rawValue,
-                        widthLeftSpacer: 20)
+                        widthLeftSpacer: value.0.1)
                 }
             })
             .store(in: &subscribtions)
@@ -38,9 +38,9 @@ final class ChartBlockViewMovel: ObservableObject {
             .sink(receiveValue: { value in
                 if value.1 == .min {
                     self.minValueViewModel.updateModel(
-                        value: value.0,
+                        value: value.0.0,
                         text: value.1.rawValue,
-                        widthLeftSpacer: 20)
+                        widthLeftSpacer: value.0.1)
                 }
             })
             .store(in: &subscribtions)
