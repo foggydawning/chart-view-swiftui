@@ -10,10 +10,10 @@ import Combine
 final class ChartBlockViewMovel: ObservableObject {
     private var subscribtions = Set<AnyCancellable>()
     
-    var model: ChartBlockModel
+    private (set) var model: ChartBlockModel
     var chartViewModel: ChartViewModel
-    var maxValueViewModel = MinMaxValueViewModel()
-    var minValueViewModel = MinMaxValueViewModel()
+    private (set) var maxValueViewModel = MinMaxValueViewModel()
+    private (set) var minValueViewModel = MinMaxValueViewModel()
     
     init(model: ChartBlockModel, chartViewModel: ChartViewModel) {
         self.model = model
@@ -21,7 +21,7 @@ final class ChartBlockViewMovel: ObservableObject {
         makeSubscriptions()
     }
     
-    func makeSubscriptions(){
+    private func makeSubscriptions(){
         chartViewModel
             .minMaxValuePublisher
             .sink(receiveValue: { value in

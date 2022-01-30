@@ -10,11 +10,11 @@ import Combine
 import Foundation
 
 final class ChartViewModel: ObservableObject {
-    var model: СhartModel
+    private (set) var model: СhartModel
     var objectWillChange = ObservableObjectPublisher()
     var minMaxValuePublisher = PassthroughSubject<((Double, CGFloat), MinMaxEnum), Never>()
     
-    var colomnsForRendering: [(CGFloat, CGFloat)] = [] {
+    private (set) var colomnsForRendering: [(CGFloat, CGFloat)] = [] {
         didSet {objectWillChange.send()}
     }
     

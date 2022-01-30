@@ -24,6 +24,7 @@ struct ChartBlockView: View {
                 DividingLine()
                 Spacer()
                 VStack(spacing: 0){
+                    Spacer()
                     MinMaxValueView(viewModel: viewModel.maxValueViewModel)
                     ChartView(viewModel: viewModel.chartViewModel)
                     MinMaxValueView(viewModel: viewModel.minValueViewModel)
@@ -35,7 +36,7 @@ struct ChartBlockView: View {
                 }.foregroundColor(viewModel.model.accentColor)
             }
             .padding(margin)
-            .background(Color.white)
+            .background(Color("Background"))
             .cornerRadius(10)
             .padding(margin)
         }

@@ -25,5 +25,9 @@ final class MinMaxValueViewModel: ObservableObject {
             widthLeftSpacer: widthLeftSpacer
         )
     }
-    
+}
+
+enum MinMaxEnum: String {
+    case min = "МИН."
+    case max = "МАКС."
 }
