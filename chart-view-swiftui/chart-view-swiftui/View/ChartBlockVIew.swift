@@ -23,14 +23,18 @@ struct ChartBlockView: View {
                 Spacer()
                 DividingLine()
                 Spacer()
-                VStack(spacing: 0){
-                    Spacer()
-                    MinMaxValueView(viewModel: viewModel.maxValueViewModel)
-                    ChartView(viewModel: viewModel.chartViewModel)
-                    MinMaxValueView(viewModel: viewModel.minValueViewModel)
-                    CoordinateLineView(viewModel: viewModel.coordinateLineViewModel)
-                    Spacer()
-                }.foregroundColor(viewModel.model.accentColor)
+                HStack{
+                    Spacer().frame(width: 10)
+                    VStack(spacing: 0){
+                        Spacer()
+                        MinMaxValueView(viewModel: viewModel.maxValueViewModel)
+                        ChartView(viewModel: viewModel.chartViewModel)
+                        MinMaxValueView(viewModel: viewModel.minValueViewModel)
+                        CoordinateLineView(viewModel: viewModel.coordinateLineViewModel)
+                        Spacer().frame(height: height*0.03)
+                    }.foregroundColor(viewModel.model.accentColor)
+                    Spacer().frame(width: 10)
+                }
             }
             .padding(margin)
             .background(Color("Background"))

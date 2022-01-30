@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ChartView: View {
     @ObservedObject var viewModel: ChartViewModel
+    let leadingTrailingMargin: CGFloat = 10
     
     var body: some View {
         GeometryReader { internalGeometry in
             HStack(alignment: .top , spacing: 0){
-                Spacer().frame(width: 10)
+                Spacer().frame(width: leadingTrailingMargin)
                 ForEach(0 ..< viewModel.colomnsForRendering.count, id: \.self){ i in
                     let colomn: (CGFloat, CGFloat) = viewModel.colomnsForRendering[i]
                     let colHeight: CGFloat = colomn.1
@@ -42,7 +43,8 @@ struct ChartView: View {
                     }
                     Spacer().frame(width: viewModel.model.distanceBetweenColumns)
                 }
-                Spacer().frame(width: 10-viewModel.model.distanceBetweenColumns)
+                Spacer().frame(
+                    width: leadingTrailingMargin)
             }.onAppear(perform: {
                 let width: CGFloat = internalGeometry.size.width
                 let height: CGFloat = internalGeometry.size.height

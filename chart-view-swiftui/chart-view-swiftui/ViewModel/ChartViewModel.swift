@@ -257,7 +257,7 @@ extension ChartViewModel {
 //                (formatter.date(from: "2022-01-26T04:10")!, 68),
 //                (formatter.date(from: "2022-01-26T05:10")!, 68),
 //                (formatter.date(from: "2022-01-26T06:10")!, 68),
-                (formatter.date(from: "2022-01-26T00:10")!, 68),
+                (formatter.date(from: "2022-01-26T00:10")!, 85),
                 (formatter.date(from: "2022-01-26T00:20")!, 68),
                 (formatter.date(from: "2022-01-26T00:30")!, 70),
                 (formatter.date(from: "2022-01-26T00:32")!, 75),
