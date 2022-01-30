@@ -21,7 +21,7 @@ final class ChartViewModel: ObservableObject {
     }
     
     init(){
-        fetchModel()
+        fetchData()
     }
     
     func setColomnsForRendering(width: CGFloat, height: CGFloat) {
@@ -153,13 +153,10 @@ extension ChartViewModel {
     private func distributeValues(){
         guard let startDate = model.startDate else {return}
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
-        let startDateString = formatter.string(from: startDate)
-        let endIndex = startDateString.endIndex
-        let extraSecondsInt = Int(startDateString[
-            startDateString.index(endIndex, offsetBy: -2)..<endIndex
-        ]) ?? 0
-        let extraSecondsTI = TimeInterval(extraSecondsInt*60)
+        formatter.dateFormat = "mm"
+        let extraMinutesString = formatter.string(from: startDate)
+        let extraMinutesInt = Int(extraMinutesString) ?? 0
+        let extraSecondsTI = TimeInterval(extraMinutesInt*60)
         let correctedStartDate = startDate - extraSecondsTI
         var currentIntervalNumber: Int = 0
         var currentValueNumber: Int = 0
@@ -193,7 +190,7 @@ extension ChartViewModel {
 }
 
 
-// MARK: Funcs For Calculate View
+// MARK: Funcs For Calculating View
 extension ChartViewModel {
     func getColWidth (
         chartWidth: CGFloat,
@@ -238,7 +235,7 @@ extension ChartViewModel {
 
 // MARK: Test Data
 extension ChartViewModel {
-    private func fetchModel(){
+    private func fetchData(){
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
         formatter.timeZone = TimeZone(abbreviation: "UTC")

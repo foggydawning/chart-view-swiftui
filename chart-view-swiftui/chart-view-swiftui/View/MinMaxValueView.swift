@@ -16,9 +16,9 @@ struct MinMaxValueView: View {
             VStack{
                 Text(viewModel.model.text)
                     .lineLimit(1)
-                    .font(.system(size: 12, weight: .bold, design: .default))
+                    .font(.system(size: 12, weight: .bold, design: .rounded))
                 Text("\(Int(viewModel.model.value))")
-                    .font(.system(size: 20, weight: .semibold, design: .default))
+                    .font(.system(size: 20, weight: .semibold, design: .rounded))
                     .lineLimit(1)
             }
             Spacer()

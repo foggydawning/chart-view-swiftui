@@ -62,7 +62,7 @@ struct ChartBlockView: View {
             HStack (spacing: 2){
                 Image(systemName: imageName)
                 Text(text)
-                    .font(.system(size: 15, weight: .semibold, design: .default))
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
                 Spacer()
             }.foregroundColor(color)
         }
