@@ -8,11 +8,9 @@ import Foundation
 import CoreGraphics
 
 struct CoordinateLineModel {
-    var numberOfIntervals: Int = 0
-    
     var startDate: Date? = nil
     var endDate: Date? = nil
-    
     var distanceBetweenColumns: CGFloat = 4
+    var numberOfIntervals: Int = 1
     var colWidth: CGFloat = 5
 }

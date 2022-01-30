@@ -12,7 +12,9 @@ import Foundation
 final class ChartViewModel: ObservableObject {
     private (set) var model: СhartModel
     var objectWillChange = ObservableObjectPublisher()
-    var minMaxValuePublisher = PassthroughSubject<((Double, CGFloat), MinMaxEnum), Never>()
+    let minMaxValuePublisher = PassthroughSubject<((Double, CGFloat), MinMaxEnum), Never>()
+//  startDate, endDate, distanceBetweenColumns, numberOfIntervals, colWidth
+    let coordinateLineDataPublisher = PassthroughSubject<(Date, Date, CGFloat, Int, CGFloat), Never>()
     
     private (set) var colomnsForRendering: [(CGFloat, CGFloat)] = [] {
         didSet {objectWillChange.send()}
@@ -26,6 +28,7 @@ final class ChartViewModel: ObservableObject {
         distributeValuesByIntervals()
         setMinMaxValuePosition()
         setColWidthAndSizeCoefficient(width: width, height: height)
+        sendDataForCoordinateLine()
         sendMinMaxValues()
         for interval in model.valueByIntervals {
             if interval.isEmpty {
@@ -61,6 +64,22 @@ extension ChartViewModel {
         minMaxValuePublisher.send(
             ((maxValue, maxPos*colWidthPlusSpacerWidth), .max)
         )
+    }
+    
+    private func sendDataForCoordinateLine() {
+        guard let startDate = model.startDate else {return}
+        guard let endDate = model.endDate else {return}
+        let distanceBetweenColumns = model.distanceBetweenColumns
+        let numberOfIntervals = model.numberOfIntervals
+        let colWidth = model.colWidth
+        coordinateLineDataPublisher
+            .send(
+                (startDate,
+                endDate,
+                distanceBetweenColumns,
+                numberOfIntervals,
+                colWidth)
+            )
     }
 }
 

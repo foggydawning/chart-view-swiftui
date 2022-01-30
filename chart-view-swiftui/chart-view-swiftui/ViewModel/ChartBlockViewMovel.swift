@@ -14,6 +14,7 @@ final class ChartBlockViewMovel: ObservableObject {
     var chartViewModel: ChartViewModel
     private (set) var maxValueViewModel = MinMaxValueViewModel()
     private (set) var minValueViewModel = MinMaxValueViewModel()
+    private (set) var coordinateLineViewModel =  CoordinateLineViewModel()
     
     init(model: ChartBlockModel, chartViewModel: ChartViewModel) {
         self.model = model
@@ -24,25 +25,40 @@ final class ChartBlockViewMovel: ObservableObject {
     private func makeSubscriptions(){
         chartViewModel
             .minMaxValuePublisher
-            .sink(receiveValue: { value in
-                if value.1 == .max {
+            .sink(receiveValue: { valueText, minMaxType in
+                if minMaxType == .max {
                     self.maxValueViewModel.updateModel(
-                        value: value.0.0,
-                        text: value.1.rawValue,
-                        widthLeftSpacer: value.0.1)
+                        value: valueText.0,
+                        text: minMaxType.rawValue,
+                        widthLeftSpacer: valueText.1)
                 }
             })
             .store(in: &subscribtions)
         chartViewModel
             .minMaxValuePublisher
-            .sink(receiveValue: { value in
-                if value.1 == .min {
+            .sink(receiveValue: { valueText, minMaxType in
+                if minMaxType == .min {
                     self.minValueViewModel.updateModel(
-                        value: value.0.0,
-                        text: value.1.rawValue,
-                        widthLeftSpacer: value.0.1)
+                        value: valueText.0,
+                        text: minMaxType.rawValue,
+                        widthLeftSpacer: valueText.1)
                 }
             })
             .store(in: &subscribtions)
+        
+        chartViewModel
+            .coordinateLineDataPublisher
+            .sink(receiveValue: { startDate, endDate, distanceBetweenColumns, numberOfIntervals, colWidth in
+                self.coordinateLineViewModel.setNewDataToModel(
+                    startDate: startDate,
+                    endDate: endDate,
+                    distanceBetweenColumns: distanceBetweenColumns,
+                    numberOfIntervals: numberOfIntervals,
+                    colWidth: colWidth
+                )
+            })
+            .store(in: &subscribtions)
+        
+        
     }
 }

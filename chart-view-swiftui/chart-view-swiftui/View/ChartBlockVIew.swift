@@ -28,11 +28,8 @@ struct ChartBlockView: View {
                     MinMaxValueView(viewModel: viewModel.maxValueViewModel)
                     ChartView(viewModel: viewModel.chartViewModel)
                     MinMaxValueView(viewModel: viewModel.minValueViewModel)
-                    HStack {
-                        Color(.black)
-                            .frame(height: 20)
-                    }
-                    Spacer().frame(height: height*0.04)
+                    CoordinateLineView(viewModel: viewModel.coordinateLineViewModel)
+                    Spacer()
                 }.foregroundColor(viewModel.model.accentColor)
             }
             .padding(margin)
