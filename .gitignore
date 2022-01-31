@@ -29,3 +29,36 @@ Temporary Items
 
 
 *.xcuserstate
+# core
+core
+core-*
+realm-core-*-xcframework
+
+# sh build.sh test
+build/
+
+
+# sh build.sh cocoapods-setup
+/include
+
+# sh build.sh docs
+/docs/objc_output
+/docs/swift_output
+/Realm/RLMPlatform.h
+
+# XCode
+*.bak
+xcuserdata/
+project.xcworkspace
+*.xccheckout
+DerivedData
+/.build
+
+# AppCode
+.idea/
+*.iml
+# backup and crash files
+*.swp
+
+# xcpretty
+build.log
