@@ -1,5 +1,6 @@
 # chart-view-swiftui
 Chart view implemented via SwiftUI + MVVM + Combine. DB - Realm
+
 .div1 {display:inline-block;}
 <div class="div1">
 <img src="https://raw.githubusercontent.com/foggydawning/chart-view-swiftui/main/preview/screenshot-1.png" width="200" />
