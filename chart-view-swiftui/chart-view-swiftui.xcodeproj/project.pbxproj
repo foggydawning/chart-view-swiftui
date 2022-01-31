@@ -67,7 +67,6 @@
 				99D901BC37A5869ADFA9A994 /* Pods-chart-view-swiftui.debug.xcconfig */,
 				ACB1B1ABE84517763E8BE12B /* Pods-chart-view-swiftui.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -104,8 +103,8 @@
 				D35AF9D327A19B80001A8A5B /* Model */,
 				D35AF9D127A19B53001A8A5B /* View */,
 				D35AF9D227A19B5E001A8A5B /* ViewModel */,
-				D35AF9C627A19A88001A8A5B /* Assets.xcassets */,
 				D35AF9C827A19A88001A8A5B /* Preview Content */,
+				D35AF9C627A19A88001A8A5B /* Assets.xcassets */,
 			);
 			path = "chart-view-swiftui";
 			sourceTree = "<group>";
