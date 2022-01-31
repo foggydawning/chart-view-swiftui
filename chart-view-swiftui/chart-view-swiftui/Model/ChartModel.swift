@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 
 struct СhartModel {
-    var values: [(Date, Double)]
+    var values: [(Date, Int)]
     var numberOfIntervals: Int = 0
     var valueByIntervals: [[Double]] = []
     

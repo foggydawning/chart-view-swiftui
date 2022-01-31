@@ -19,7 +19,9 @@ struct ChartView: View {
                     let colomn: (CGFloat, CGFloat) = viewModel.colomnsForRendering[i]
                     let colHeight: CGFloat = colomn.1
                     let colWidth: CGFloat = viewModel.model.colWidth
-                    let topSpacerHeight: CGFloat = colomn.0
+                    let topSpacerHeight: CGFloat = {
+                        (colWidth == colHeight && viewModel.model.minValuePosition == i) ? colomn.0 - colHeight : colomn.0
+                    }()
                     ZStack {
                         VStack(spacing: 0){
                             Spacer().frame(height: topSpacerHeight)
@@ -60,8 +62,8 @@ struct ChartView: View {
         var body: some View {
             VStack(spacing: 0){
                 Spacer().frame(height: minOrMax == .min
-                               ? topSpacerHeight+colHeight-colWidth
-                               : topSpacerHeight+colWidth*0.4)
+                               ? topSpacerHeight+colHeight-colWidth*0.8
+                               : topSpacerHeight+colWidth*0.2)
                 Circle()
                     .frame(width: colWidth*0.6,
                            height: colWidth*0.6)

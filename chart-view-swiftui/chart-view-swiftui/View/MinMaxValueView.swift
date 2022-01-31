@@ -12,7 +12,7 @@ struct MinMaxValueView: View {
     
     var body: some View {
         HStack(spacing: 0){
-            Spacer().frame(width: viewModel.model.widthLeftSpacer)
+            Spacer().frame(maxWidth: viewModel.model.widthLeftSpacer)
             VStack{
                 Text(viewModel.model.text)
                     .lineLimit(1)

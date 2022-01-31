@@ -14,6 +14,7 @@
 		D314978C27A485EE003B63D8 /* MinMaxValueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314978B27A485EE003B63D8 /* MinMaxValueViewModel.swift */; };
 		D314978E27A48704003B63D8 /* MinMaxValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314978D27A48704003B63D8 /* MinMaxValueModel.swift */; };
 		D314979227A48D20003B63D8 /* MinMaxValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D314979127A48D20003B63D8 /* MinMaxValueView.swift */; };
+		D31C5E6427A7DC6800567F73 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C5E6327A7DC6800567F73 /* Model.swift */; };
 		D331C4C627A70F5A00DBC565 /* CoordinateLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D331C4C527A70F5A00DBC565 /* CoordinateLineModel.swift */; };
 		D331C4C827A70F7800DBC565 /* CoordinateLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D331C4C727A70F7800DBC565 /* CoordinateLineView.swift */; };
 		D331C4CA27A70F8600DBC565 /* CoordinateLineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D331C4C927A70F8600DBC565 /* CoordinateLineViewModel.swift */; };
@@ -35,6 +36,7 @@
 		D314978B27A485EE003B63D8 /* MinMaxValueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinMaxValueViewModel.swift; sourceTree = "<group>"; };
 		D314978D27A48704003B63D8 /* MinMaxValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinMaxValueModel.swift; sourceTree = "<group>"; };
 		D314979127A48D20003B63D8 /* MinMaxValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinMaxValueView.swift; sourceTree = "<group>"; };
+		D31C5E6327A7DC6800567F73 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D331C4C527A70F5A00DBC565 /* CoordinateLineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateLineModel.swift; sourceTree = "<group>"; };
 		D331C4C727A70F7800DBC565 /* CoordinateLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateLineView.swift; sourceTree = "<group>"; };
 		D331C4C927A70F8600DBC565 /* CoordinateLineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateLineViewModel.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D31C5E6527A7DC6E00567F73 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				D31C5E6327A7DC6800567F73 /* Model.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		D35AF9B627A19A86001A8A5B = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +115,7 @@
 				D35AF9D227A19B5E001A8A5B /* ViewModel */,
 				D35AF9C827A19A88001A8A5B /* Preview Content */,
 				D35AF9C627A19A88001A8A5B /* Assets.xcassets */,
+				D31C5E6527A7DC6E00567F73 /* Realm */,
 			);
 			path = "chart-view-swiftui";
 			sourceTree = "<group>";
@@ -278,6 +289,7 @@
 				D35AF9C327A19A86001A8A5B /* Сhart_view_swiftuiApp.swift in Sources */,
 				D310215127A40934004D9E97 /* ChartBlockVIew.swift in Sources */,
 				D331C4CA27A70F8600DBC565 /* CoordinateLineViewModel.swift in Sources */,
+				D31C5E6427A7DC6800567F73 /* Model.swift in Sources */,
 				D314978C27A485EE003B63D8 /* MinMaxValueViewModel.swift in Sources */,
 				D331C4C627A70F5A00DBC565 /* CoordinateLineModel.swift in Sources */,
 				D314978E27A48704003B63D8 /* MinMaxValueModel.swift in Sources */,
@@ -435,7 +447,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -465,7 +477,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
