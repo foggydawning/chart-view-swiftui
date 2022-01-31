@@ -8,7 +8,7 @@
 import CoreGraphics
 
 struct MinMaxValueModel {
-    var value: Double = 1
+    var value: Double = 0
     var text: String = "МАКС."
     
     var widthLeftSpacer: CGFloat = 0

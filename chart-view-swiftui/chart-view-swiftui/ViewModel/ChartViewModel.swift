@@ -26,6 +26,12 @@ final class ChartViewModel: ObservableObject {
     }
     
     func setColomnsForRendering(width: CGFloat, height: CGFloat) {
+        // start Block ONLY FOR A TEST
+        if model.values.isEmpty {
+            writeTestDataToDB()
+            fetchData()
+        }
+        // end Block ONLY FOR A TEST
         distributeValuesByIntervals()
         setMinMaxValuePosition()
         setColWidthAndSizeCoefficient(width: width, height: height)
@@ -241,7 +247,7 @@ extension ChartViewModel {
     
 }
 
-// MARK: Test Data
+// MARK: Fetch Data
 extension ChartViewModel {
     private func fetchData(){
         let realm = try! Realm()
@@ -253,3 +259,20 @@ extension ChartViewModel {
     }
 }
 
+// MARK: Test Data ONLY FOR A TEST
+extension ChartViewModel {
+    private func writeTestDataToDB(){
+        let testValues: [(Date, Int)] = TestData.getData()
+        let realm = try! Realm()
+        let group = RealmGroupValuesModel()
+        for value in testValues {
+            let DBValue = RealmValueModel()
+            DBValue.value = value.1
+            DBValue.date = value.0
+            group.values.append(DBValue)
+        }
+        realm.beginWrite()
+        realm.add(group)
+        try! realm.commitWrite()
+    }
+}
