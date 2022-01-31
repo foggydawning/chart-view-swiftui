@@ -2,7 +2,7 @@
 Chart view implemented via SwiftUI + MVVM + Combine. DB - Realm
 
 <img src="https://raw.githubusercontent.com/foggydawning/chart-view-swiftui/main/preview/screenshot-1.png" width="200" />
-
+<img src="https://github.com/foggydawning/chart-view-swiftui/blob/main/preview/gif-1.gif?raw=true" width="200" />
 ## Project Description
 The project is a View that allows you to REPRODUCE data in the format (Date, Int), combined into groups.
 
