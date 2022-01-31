@@ -1,7 +1,7 @@
 # chart-view-swiftui
 Chart view implemented via SwiftUI + MVVM + Combine. DB - Realm
 
-![til](./gifs/screenshot-1)
+![til](./preview/screenshot-1.png)
 
 ## Project Description
 The project is a View that allows you to REPRODUCE data in the format (Date, Int), combined into groups.
