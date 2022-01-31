@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F53E4C03CC03836E60EAC49 /* Pods_chart_view_swiftui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F060407BBA82B283FF2936B1 /* Pods_chart_view_swiftui.framework */; };
 		D310214F27A408E3004D9E97 /* ChartBlockViewMovel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310214E27A408E3004D9E97 /* ChartBlockViewMovel.swift */; };
 		D310215127A40934004D9E97 /* ChartBlockVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310215027A40934004D9E97 /* ChartBlockVIew.swift */; };
 		D310215327A4158C004D9E97 /* ChartBlockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310215227A4158C004D9E97 /* ChartBlockModel.swift */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		99D901BC37A5869ADFA9A994 /* Pods-chart-view-swiftui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chart-view-swiftui.debug.xcconfig"; path = "Target Support Files/Pods-chart-view-swiftui/Pods-chart-view-swiftui.debug.xcconfig"; sourceTree = "<group>"; };
+		ACB1B1ABE84517763E8BE12B /* Pods-chart-view-swiftui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chart-view-swiftui.release.xcconfig"; path = "Target Support Files/Pods-chart-view-swiftui/Pods-chart-view-swiftui.release.xcconfig"; sourceTree = "<group>"; };
 		D310214E27A408E3004D9E97 /* ChartBlockViewMovel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBlockViewMovel.swift; sourceTree = "<group>"; };
 		D310215027A40934004D9E97 /* ChartBlockVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBlockVIew.swift; sourceTree = "<group>"; };
 		D310215227A4158C004D9E97 /* ChartBlockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBlockModel.swift; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 		D35AF9D427A1A186001A8A5B /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		D35AF9D627A1A191001A8A5B /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		D35AF9D827A1A1A4001A8A5B /* ChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartModel.swift; sourceTree = "<group>"; };
+		F060407BBA82B283FF2936B1 /* Pods_chart_view_swiftui.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chart_view_swiftui.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,17 +54,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F53E4C03CC03836E60EAC49 /* Pods_chart_view_swiftui.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F8F563656345E6F9574BED4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				99D901BC37A5869ADFA9A994 /* Pods-chart-view-swiftui.debug.xcconfig */,
+				ACB1B1ABE84517763E8BE12B /* Pods-chart-view-swiftui.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AB40E5F06490AE9E0D11D8E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F060407BBA82B283FF2936B1 /* Pods_chart_view_swiftui.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D35AF9B627A19A86001A8A5B = {
 			isa = PBXGroup;
 			children = (
 				D35AF9C127A19A86001A8A5B /* chart-view-swiftui */,
 				D35AF9C027A19A86001A8A5B /* Products */,
+				4F8F563656345E6F9574BED4 /* Pods */,
+				AB40E5F06490AE9E0D11D8E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,9 +167,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D35AF9CD27A19A88001A8A5B /* Build configuration list for PBXNativeTarget "chart-view-swiftui" */;
 			buildPhases = (
+				6A451E4289DE9E0DFD5D0775 /* [CP] Check Pods Manifest.lock */,
 				D35AF9BB27A19A86001A8A5B /* Sources */,
 				D35AF9BC27A19A86001A8A5B /* Frameworks */,
 				D35AF9BD27A19A86001A8A5B /* Resources */,
+				90B26365BA149739A001F647 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,6 +226,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6A451E4289DE9E0DFD5D0775 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chart-view-swiftui-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90B26365BA149739A001F647 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-chart-view-swiftui/Pods-chart-view-swiftui-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-chart-view-swiftui/Pods-chart-view-swiftui-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-chart-view-swiftui/Pods-chart-view-swiftui-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D35AF9BB27A19A86001A8A5B /* Sources */ = {
@@ -343,6 +412,7 @@
 		};
 		D35AF9CE27A19A88001A8A5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99D901BC37A5869ADFA9A994 /* Pods-chart-view-swiftui.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -372,6 +442,7 @@
 		};
 		D35AF9CF27A19A88001A8A5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACB1B1ABE84517763E8BE12B /* Pods-chart-view-swiftui.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
