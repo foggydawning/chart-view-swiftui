@@ -142,8 +142,14 @@ extension ChartViewModel {
         guard let endDate = model.endDate else {return}
         let dateInterval = DateInterval(start: startDate, end: endDate)
         let timeInterval: TimeInterval = dateInterval.duration / 60
-        let numberOfIntervals: Int = Int(ceil((timeInterval / 30)))
-        model.numberOfIntervals = numberOfIntervals + 1
+        let numberHalfHours: Double = timeInterval / 30
+        var numberOfIntervals: Int = Int(ceil((timeInterval / 30)))
+        if let fractPartString = String(numberHalfHours).split(separator: ".").last{
+            if Int(fractPartString) == .zero {
+                numberOfIntervals += 1
+            }
+        }
+        model.numberOfIntervals = numberOfIntervals
     }
     
     private func setEmptyArraysForValueByIntervals(){
@@ -174,7 +180,7 @@ extension ChartViewModel {
                 currentIntervalNumber += 1
             }
         }
-        if model.valueByIntervals.last?.isEmpty == false {
+        if model.valueByIntervals.last?.isEmpty == true {
             _ = model.valueByIntervals.popLast()
             model.numberOfIntervals -= 1
         }
